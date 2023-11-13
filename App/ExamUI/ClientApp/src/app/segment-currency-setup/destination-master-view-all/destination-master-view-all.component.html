@@ -1,0 +1,160 @@
+<section class="section">
+    <div class="container-fluid">
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30">
+    <div class="row align-items-center">
+    <div class="col-md-5">
+    <div class="title mb-10"><h2>Destination Master</h2></div>
+    </div>
+    <!-- end col -->
+    <div class="col-md-7 rowmargin10">
+    <div class="breadcrumb-wrapper">
+    <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="#0"><i class="lni lni-home"></i></a></li>
+    <li class="breadcrumb-item"><a href="#0">Segment & Currency Setup</a></li>	
+    <li class="breadcrumb-item active" aria-current="page">Destination Master</li>
+    </ol>
+    </nav>
+    </div>
+    </div>
+    <!-- end col -->
+    </div>
+    <!-- end row -->
+    </div>
+    <!-- ========== title-wrapper end ========== -->
+        
+    <!-- ========== Middle Content-wrapper start ========== -->	
+    <div class="right-mob-left"><button type="button" class="main-btn primary-btn-outline btn-hover btn-xs">Import</button> 
+        <a [routerLink]="['/destination-master', {queryParams: {action: 'create'}}]"><button type="button" class="main-btn primary-btn btn-hover btn-xs">Create</button></a></div>
+  
+    <div class="card-style mt-20">
+    <div class="create_update">Last updated: <span>{{ Updatedby }}  On {{ UpdatedOn }}</span></div>	
+    <div class="row">
+    <div class="col-sm-3">
+    <div class="select-style-1">
+    <div class="select-sm">
+        <mat-select placeholder="Select Country">
+            <mat-option *ngFor="let country of countries" [value]="country.value">
+            {{ country.viewValue }}
+            </mat-option>
+        </mat-select>
+    </div>
+    </div>		
+    </div>	
+    <div class="col-sm-3">
+    <div class="searchfield">
+    <input matInput type="text" placeholder="Search..." [value]="searchText">
+    <button><i class="lni lni-search-alt"></i></button>
+    </div>	
+    </div>
+    <div class="col-sm-3">
+    <div class="filtertext">
+    <ul>
+    <li>{{ selectionAmount }} Selected</li>
+    <!--<li><a href="#"><i class="lni lni-pencil"></i> Edit</a></li>-->
+    <li [hidden]="!selectionAmount"><a href="javascript:;" (click)="delete()"><i class="lni lni-trash-can"></i> Delete</a></li>
+    </ul>	
+    </div>	
+    </div>	
+    <div class="col-sm-3 rowmargin10">
+    <div class="right-mob-left"><button type="button" class="main-btn dark-btn btn-hover btn-xs">Export</button></div>
+    </div>	
+    </div>
+        
+    <div class="table-wrapper table-responsive mt-10">
+    <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> 
+            <mat-checkbox (change)="$event ? toggleAllRows() : null"
+                  [checked]="selection.hasValue() && isAllSelected()"
+                  [indeterminate]="selection.hasValue() && !isAllSelected()">
+            </mat-checkbox>
+        </th>
+        <td mat-cell *matCellDef="let row" value="row.id"> 
+            <mat-checkbox (click)="$event.stopPropagation()"
+                  (change)="onRowSelection($event, row)"
+                  [checked]="selection.isSelected(row)">
+            </mat-checkbox>
+        </td>
+    </ng-container>
+
+    <!-- Destination Column -->
+    <ng-container matColumnDef="destinationName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Destination </th>
+        <td mat-cell *matCellDef="let row"> {{row.destinationName}} </td>
+    </ng-container>
+
+    <!-- Destination Code Column -->
+    <ng-container matColumnDef="destinationCode">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Destination Code </th>
+        <td mat-cell *matCellDef="let row"> {{row.destinationCode}} </td>
+    </ng-container>
+
+    <!-- Country Column -->
+    <ng-container matColumnDef="countryDetailsID">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Country </th>
+        <td mat-cell *matCellDef="let row" > {{row.countryDetailsID}} </td>
+    </ng-container>
+
+        <!-- Segment Column -->
+    <ng-container matColumnDef="segment">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Segment </th>
+        <td mat-cell *matCellDef="let row"> {{row.segment}} </td>
+    </ng-container>
+
+    <!-- Action Column -->
+    <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <td class="text-center" mat-cell *matCellDef="let row"> 
+            {{row.action}} 
+            <a href="javascript:;" (click)="edit(row)"><i class="lni lni-pencil-alt"></i></a>
+        </td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="isActive">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let row"> 
+            <div class="activelabel" [hidden]="!row.isActive"> Active</div>
+            <div class="inactivelabel" [hidden]="row.isActive"> Inactive</div>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{ searchText }}"</td>
+    </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+    <!-- end table -->
+    </div>
+    </div>
+
+    </div>
+</section>
+<!-- <div class="mt-30">	
+<div class="row">
+<div class="col-sm-6">
+<div class="total_records">Total Records: <span>3000</span>	</div>
+</div>
+<div class="col-sm-6">
+<nav aria-label="Page navigation example" class="pagination_new">
+<ul class="pagination">
+<li class="page-item">
+<a class="page-link" href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+</li>
+<li class="page-item"><a class="page-link" href="#">1</a></li>
+<li class="page-item"><a class="page-link" href="#">2</a></li>
+<li class="page-item"><a class="page-link" href="#">3</a></li>
+<li class="page-item">
+<a class="page-link" href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+</li>
+</ul>
+</nav>
+</div>		
+</div>	
+</div>	 -->

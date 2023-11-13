@@ -1,0 +1,105 @@
+<div class="card">
+  <h4 class="card-header">Login</h4>
+  <div class="card-body">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label">Username</label>
+        <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+        <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+          <div *ngIf="f.username.errors.required">Username is required</div>
+        </div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+        </div>
+      </div>
+      <div>
+        <button [disabled]="loading" class="btn btn-primary">
+          <span *ngIf="loading" class="spinner-border spinner-border-sm me-1"></span>
+          Login
+        </button>
+        <a routerLink="../register" class="btn btn-link">Register</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<!-- ========== signin-section start ========== -->
+<!-- <section class="signin-section">
+  <div class="container">
+    <div class="title mb-30 mt-20 text-center"> <img src="../../assets/images/logo/logo.png" alt="" /> </div>
+    <div class="row g-0 auth-row">
+      <div class="col-lg-6">
+        <div class="auth-cover-wrapper loginbg">
+          <div class="auth-cover">
+            <div class="title text-center">
+              <h1 class="text-primary mb-10">Welcome Back</h1>
+              <p class="text-medium"> Sign in to your existing account to continue </p>
+            </div>
+            <div class="cover-image"> <img src="../../assets/images/auth/loginimg.svg" alt="" /> </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="signin-wrapper">
+          <div class="form-wrapper">
+            <div class="title mb-30">
+              <h2>Sign in</h2>
+            </div>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+              <div class="row">
+                <div class="col-12">
+                  <div class="input-style-1">
+                    <label>Username</label>
+                    <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.username.errors }" placeholder="Username" />
+                    <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                      <div *ngIf="f.username.errors.required">Username is required</div>
+                    </div>
+                  </div>
+                </div>
+        
+                <div class="col-12">
+                  <div class="input-style-1">
+                    <label>Password</label>
+                    <input type="password" placeholder="Password"  formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <div *ngIf="f.password.errors.required">Password is required</div>
+                    </div>
+                  </div>
+                </div>
+     
+                <div class="col-xxl-6 col-lg-12 col-md-6">
+                  <div class="form-check mb-30">
+                    <input class="form-check-input" type="checkbox" value="" id="checkbox-remember" />
+                    <label class="form-check-label" for="checkbox-remember"> Remember me next time</label>
+                  </div>
+                </div>
+    
+                <div class="col-xxl-6 col-lg-12 col-md-6">
+                  <div class=" text-start text-md-end text-lg-start text-xxl-end mb-30"> <a href="#0" class="hover-underline">Forgot Password?</a> </div>
+                </div>
+         
+                <div class="col-12">
+                  <div class="button-group d-flex justify-content-center flex-wrap">
+                    <button class="main-btn primary-btn btn-hover w-100 text-center btnlink"><a href="employee_master.html">Sign in</a></button>
+
+                  </div>
+                </div>
+              </div>
+         
+            </form>
+          </div>
+        </div>
+      </div>
+     
+    </div>
+
+  </div>
+</section> -->
+<!-- ========== signin-section end ========== -->

@@ -1,0 +1,60 @@
+<section class="section">
+  <div class="container-fluid">
+    <!-- ========== title-wrapper start ========== -->
+    <div class="title-wrapper pt-30">
+      <div class="row align-items-center">
+        <div class="col-md-5">
+          <div class="title mb-10"><h2>Country Master</h2></div>
+        </div>
+        <!-- end col -->
+        <div class="col-md-7 rowmargin10">
+          <div class="breadcrumb-wrapper">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#0"><i class="lni lni-home"></i></a></li>
+                <li class="breadcrumb-item"><a href="#0">Segment & Currency Setup</a></li>
+                <li class="breadcrumb-item"><a href="">Destination Master</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Create Destination Master</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+        <!-- end col -->
+      </div>
+      <!-- end row -->
+    </div>
+    <!-- ========== title-wrapper end ========== -->
+    <!-- ========== Middle Content-wrapper start ========== -->
+    <div class="row">
+      <div class="col-sm-5">
+        <div class="title rowmargindesk10"><h4>Create Destination Master</h4></div>
+      </div>
+      <div class="col-sm-7 rowmargin10">
+        <div class="right-mob-left"><a routerLink="/destination-master-view"><button type="button" class="main-btn primary-btn-outline btn-hover btn-xs back_btn"><i class="lni lni-chevron-left me-2"></i>Back</button></a></div>
+      </div>
+    </div>
+
+    <div class="card-style mt-20">
+      <div class="create_update">Created: <span> {{ Createdby }}  On {{ CreatedOn }}</span>   |   Last updated: <span>{{ Updatedby }}  On {{ UpdatedOn }}</span></div>
+      <div class="tabs">
+        <!--Tab Name start here-->
+        <mat-tab-group>
+          <mat-tab label="General Information"  class="active"><app-destination-master-general-information></app-destination-master-general-information></mat-tab>
+          <mat-tab label="Destination Images">Destination Images</mat-tab>
+          <mat-tab label="Destination Airport">Destination Airport</mat-tab>
+          <mat-tab label="Destination District">Destination District/Location/Area</mat-tab>
+          <mat-tab label="Things To Do">Things To Do</mat-tab>
+          <mat-tab label="Things To See">Things To See</mat-tab>
+        </mat-tab-group>
+
+      </div>
+
+    </div>
+
+    <!-- <app-destination-master-view-all></app-destination-master-view-all> -->
+
+    <!-- ========== Middle Content-wrapper end ========== -->
+
+  </div>
+  <!-- end container -->
+</section>

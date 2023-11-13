@@ -1,0 +1,117 @@
+{
+  "Routes": [
+    //Identity
+    {
+      "DownstreamPathTemplate": "/api/Identity/{url}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7081
+        }
+      ],
+      "UpstreamPathTemplate": "/Identity/{url}",
+      "UpstreamHttpMethod": [
+        "Get",
+        "POST",
+        "PUT",
+        "DELETE",
+        "OPTIONS"
+      ]
+      //"AuthenticationOptions": {
+      //  "AllowAnonymous": true
+      //}
+    },
+    //Users
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7080
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Users/{url}",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/Users/{url}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "OPTIONS"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+        //"AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7082
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Company/{url}",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/Company/{url}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "OPTIONS"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+        //"AllowedScopes": []
+      }
+    },
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7062
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Content/{url}",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/Content/{url}",
+      "UpstreamHttpMethod": [
+        "GET"
+      
+      ]//,
+      //"AuthenticationOptions": {
+      //  "AuthenticationProviderKey": "Bearer"
+      //  //"AllowedScopes": []
+      //}
+    },
+    //DestinationMaster
+    {
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7061
+        }
+      ],
+      "DownstreamPathTemplate": "/api/Destination/{url}",
+      "DownstreamScheme": "https",
+      "UpstreamPathTemplate": "/Destination/{url}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "OPTIONS"
+      ],
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+        //"AllowedScopes": []
+      }
+    }
+
+  ],
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:7009"
+  }
+}

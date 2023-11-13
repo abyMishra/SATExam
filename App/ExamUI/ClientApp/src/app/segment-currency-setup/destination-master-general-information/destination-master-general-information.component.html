@@ -1,0 +1,143 @@
+<div id="GeneralInformation" class="active" fxLayout="row" fxLayoutAlign="center center">
+  <form [formGroup]="destinationGeneralInformationForm" (ngSubmit)="submit()" fxFlex="100%">
+    <h4>General Information</h4>
+    <h6 class="mt-20">Country Information</h6>
+    <div class="row mt-15">
+      <div class="col-sm-4">
+        <div class="select-style-1">
+          <label>Country<span class="mandatory">*</span></label>
+          <mat-select placeholder="Select Country" formControlName="country">
+            <mat-option *ngFor="let country of countries" [value]="country.value">
+              {{ country.viewValue }}
+            </mat-option>
+          </mat-select>
+          <span class="mandatory" *ngIf="(formSubmitted || destinationGeneralInformationForm.controls.country.touched) && destinationGeneralInformationForm.controls.country.errors?.required">Country is required</span>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="input-style-1">
+          <label>Destination Name<span class="mandatory">*</span></label>
+          <input matInput type="text" placeholder="" formControlName="destinationName" />
+          <span class="mandatory" *ngIf="(formSubmitted || destinationGeneralInformationForm.controls.destinationName.touched) && destinationGeneralInformationForm.controls.destinationName.errors?.required">Destination Name is required</span>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="input-style-1">
+          <label>Destination Code</label>
+          <!--<mat-form-field>-->
+          <input matInput type="text" placeholder="" formControlName="destinationCode" />
+          <!--</mat-form-field>-->
+        </div>
+      </div>
+    </div>
+
+    <h6>Destination Description</h6>
+    <div class="input-style-1 mt-15">
+      <!--<mat-form-field>-->
+      <textarea matInput placeholder="" rows="5" formControlName="destinationDescription"></textarea>
+      <!--</mat-form-field>-->
+    </div>
+
+    <h6>Destination Tax Information</h6>
+    <div class="table-wrapper table-responsive mt-15" [formGroup]="taxDetailsFormGroup" fxLayout="row">
+      <table mat-table [dataSource]="dataSource" formArrayName="taxDetailsArray" fxFlex="100%">
+        <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
+          <th mat-header-cell *matHeaderCellDef>
+            {{ col.label }}
+          </th>
+          <td mat-cell *matCellDef="let element; let i = index" formGroupName="{{ i }}">
+            <!--<div [ngSwitch]="col.type">
+              <span *ngSwitchDefault>
+                {{ element[col.key] }}
+              </span>
+            </div>-->
+            <div [ngSwitch]="col.key" fxLayout="row">
+              <div id="divAgeDetails" *ngSwitchCase="'ageDetails'" appearance="fill" fxFlex="100%">
+                <div id="divMinAge" fxFlex="50%">
+                  <mat-select formControlName="minAge" placeholder="Minimum Age">
+                    <mat-option *ngFor="let number of numberList" [value]="number">
+                      {{ number }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+                <div id="divMaxAge" fxFlex="50%">
+                  <mat-select formControlName="maxAge" placeholder="Maximum Age">
+                    <mat-option *ngFor="let number of numberList" [value]="number">
+                      {{ number }}
+                    </mat-option>
+                  </mat-select>
+                </div>
+              </div>
+              <!--<div id="divType">  -->
+              <!--<mat-form-field *ngSwitchCase="'type'" appearance="fill">-->
+              <div *ngSwitchCase="'type'" appearance="fill" fxLayout="row">
+                <mat-radio-group aria-label="Select an option" formControlName="taxType" fxFlex="100%">
+                  <mat-radio-button value="percent" fxFlex="25%">%</mat-radio-button>
+                  <mat-radio-button value="value" fxFlex="35%">Value</mat-radio-button>
+                  <mat-radio-button value="PerPerson" fxFlex="40%">Per Person</mat-radio-button>
+                </mat-radio-group>
+              </div>
+              <!--</mat-form-field>-->
+              <!--</div>-->
+
+              <div id="divCurrency" *ngSwitchCase="'currency'" appearance="fill" fxLayout="row">
+                <div fxFlex="100%">
+                  <div id="divAmount" class="input-style-1" fxFlex="40%">
+                    <input matInput type="text" placeholder="25.00" formControlName="taxRate" />
+                  </div>
+                  <div id="divDDCurrency" fxFlex="50%">
+                    <mat-select formControlName="currencyDetails" placeholder="Currency">
+                      <mat-option *ngFor="let currency of currencies" [value]="currency.code">
+                        {{ currency.code }}
+                      </mat-option>
+                    </mat-select>
+                  </div>
+                </div>
+              </div>
+              <!--<div id="divDelete" class="action mt-10">-->
+              <ng-container *ngSwitchCase="'delete'" appearance="fill">
+                <button type="button" mat-button class="text-danger" (click)="removeRow(i)"><i class="lni lni-trash-can"></i></button>
+              </ng-container>
+              <!--</div>-->
+
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+      <!-- end table -->
+    </div>
+    <div class="text-right"><button type="button" mat-button class="main-btn primary-btn-outline btn-hover btn-xs" (click)="addRow()"><i class="lni lni-plus me-2"></i>Add More</button></div>
+
+    <div class="row mt-20">
+      <div class="col-sm-4">
+        <div class="input-style-1">
+          <label>Latitude</label>
+          <input matInput type="text" placeholder="" formControlName="latitude" />
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="input-style-1">
+          <label>Longitude:</label>
+          <input matInput type="text" placeholder="" formControlName="longitude" />
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="input-style-1">
+          <label>Radius:</label>
+          <input matInput type="text" placeholder="" formControlName="radius" />
+        </div>
+      </div>
+    </div>
+
+    <h6>Status Information</h6>
+    <div class="row mt-15">
+      <mat-radio-group aria-label="" formControlName="status">
+        <mat-radio-button value="active">Active</mat-radio-button>
+        <mat-radio-button value="inactive">Inactive</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="mt-20"><button type="button" (click)="submit()" class="main-btn primary-btn btn-hover btn-sm">{{ isEdit ? 'Update' : 'Add' }}</button> <button type="button" class="main-btn primary-btn-outline btn-hover btn-sm">Close</button></div>
+  </form>
+</div>
