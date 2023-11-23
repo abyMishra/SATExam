@@ -13,12 +13,12 @@ export class ContentService {
   constructor(private http: HttpClient) { }
 
   getAllCountries(): Observable<any> {
-    const url = environment.gatewayBaseUrl + environment.contentCountriesUrl;
+    const url = environment.gatewayBaseUrl;// + environment.contentCountriesUrl;
     return this.http.get(url);
   }
 
   getAllCurrencies(): Observable<any> {
-    const url = environment.gatewayBaseUrl + environment.contentCurrenciesUrl;
+    const url = environment.gatewayBaseUrl;// + environment.contentCurrenciesUrl;
     return this.http.get(url);
   }
 

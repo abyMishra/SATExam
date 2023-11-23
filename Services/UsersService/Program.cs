@@ -5,6 +5,7 @@ using UsersService.BusinessLogic;
 using UsersService.DataAccess;
 using UsersService.Models;
 using System.Text;
+using CommonLibrary;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,14 +24,16 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddJwtAuthentication();
 
+builder.Services.Configure<DBSettings>(builder.Configuration.GetSection("MongoDB"));
+builder.Services.AddTransient<ICommonMethods, PasswordBycrpt>();
+builder.Services.AddTransient<IUserBusinessLogic, UserBusinessLogic>();
+builder.Services.AddSingleton<UserDataAccess>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.Configure<DBSettings>(builder.Configuration.GetSection("MongoDB"));
-builder.Services.AddTransient<IUserBusinessLogic, UserBusinessLogic>();
-builder.Services.AddSingleton<UserDataAccess>();
+
 // Add services to the container.
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

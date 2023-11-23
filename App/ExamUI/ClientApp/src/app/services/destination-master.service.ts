@@ -14,27 +14,27 @@ export class DestinationMasterService {
   constructor(private http: HttpClient) { }
 
   addDestinationMasterGeneralInformation(destinationMasterData: DestinationMasterData): Observable<string> {
-    const url = environment.gatewayBaseUrl + environment.addDestinationMasterUrl;
+    const url = environment.gatewayBaseUrl; // + environment.addDestinationMasterUrl;
     return this.http.post<string>(url, destinationMasterData);
   }
 
   updateGeneralInformation(destinationMasterData: DestinationMasterData): Observable<string> {
-    const url = environment.gatewayBaseUrl + environment.updateGeneralInformationUrl;
+    const url = environment.gatewayBaseUrl; // + environment.updateGeneralInformationUrl;
     return this.http.post<string>(url, destinationMasterData);
   }
 
   getAllDestinations() : Observable<DestinationMasterData[]> {
-    const url = environment.gatewayBaseUrl + environment.GetAllDestinationsUrl;
+    const url = environment.gatewayBaseUrl; // + environment.GetAllDestinationsUrl;
     return this.http.get<DestinationMasterData[]>(url);
   }
 
   deleteDestination(objectId: string) : Observable<boolean> {
-    const url = environment.gatewayBaseUrl + environment.DeleteDestinationUrl;
+    const url = environment.gatewayBaseUrl;//  + environment.DeleteDestinationUrl;
     return this.http.delete<boolean>(url + '?objectId=' + objectId);
   }
 
   deleteDestinationTaxInfo(objectId: string, taxInfo: TaxDetail) : Observable<boolean> {
-    const url = environment.gatewayBaseUrl + environment.DeleteDestinationTaxInfoUrl;
+    const url = environment.gatewayBaseUrl; // + environment.DeleteDestinationTaxInfoUrl;
     return this.http.post<boolean>(url + '?objectId=' + objectId, taxInfo);
   }
 }

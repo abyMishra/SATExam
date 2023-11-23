@@ -46,18 +46,18 @@ export class LoginComponent implements OnInit {
   }
 
   fetchPublicKey() {
-    this.identityService.identityCompanyPublic(this.credentials)
-      .subscribe({
-        next: (response: any) => {
-          console.log(response);
-          sessionStorage.setItem('publickey', response.auth_token);
-          this.publicKey = response.auth_token;
-        },
-        error: (error: any) => {
-          this.message = 'Error in Fetching Company Details!';
-          this.loading = false;
-        }
-      });
+    // this.identityService.identityCompanyPublic(this.credentials)
+    //   .subscribe({
+    //     next: (response: any) => {
+    //       console.log(response);
+    //       sessionStorage.setItem('publickey', response.auth_token);
+    //       this.publicKey = response.auth_token;
+    //     },
+    //     error: (error: any) => {
+    //       this.message = 'Error in Fetching Company Details!';
+    //       this.loading = false;
+    //     }
+    //   });
   }
 
 
