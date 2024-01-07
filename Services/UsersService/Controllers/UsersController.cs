@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using ExamService.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using UsersService.BusinessLogic;
 using UsersService.Models;
@@ -19,6 +20,7 @@ namespace UsersService.Controllers
         }
 
         // GET: api/<UsersController>
+        [Authorize]
         [HttpGet("allUsers")]
         public async Task<List<User>> Get()
         {
@@ -28,7 +30,6 @@ namespace UsersService.Controllers
 
         // POST api/<UsersController>
         [HttpPost("CreateUser")]
-        [Authorize]
         public async Task<IActionResult> Post([FromBody] User user)
         {
             await _userBusinessLogic.CreateAsync(user);
@@ -54,8 +55,8 @@ namespace UsersService.Controllers
         }
 
         [HttpPost("AuthanticateUser")]
-        [Authorize]
-        public IActionResult AuthanticateUser([FromBody] User user)
+        //[Authorize]
+        public IActionResult AuthanticateUser([FromBody] Login user)
         {
             var authUser = _userBusinessLogic.AuthanticateUser(user.Username, user.Password);
             if (authUser != null)

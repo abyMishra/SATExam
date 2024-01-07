@@ -4,9 +4,12 @@
 
 export const environment = {
   production: false,
-  gatewayBaseUrl: 'http://localhost:7080',
-  authenticateUrl: '/Users/authenticate',
-  createUserUrl: '/Users/CreateUser' 
+  gatewayBaseUrl: 'https://localhost:7080',
+  authenticateUrl: '/api/Users/AuthanticateUser',
+  createUserUrl: '/Users/CreateUser',
+  publicKey: '-----BEGIN PUBLIC KEY-----\n' +
+    'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2bq72ckd0dqEgxWAYHALaiQ0B8RFZ7GO1Zjs4QnBFUNAutiLhpz7WjWaGuD8R1plyF1OWhJQfoBSbCDGW/Y1BSU2AJI5mobMnL2fOyygCVlEzw9RMP4y1BmTdIi + QDcuOSIOoT0Abjd / MOb54gmrCbGiDrI5oCE / pDCBDViwndkD + 6JsPTgQ4I9rAHGkTy0pDLv8NvvyACNFVPMfqS6RYVTOAGBaUeVooiqxGGPkMQTSGuBz3fZrrfwN9QbiR8JZJLMl7dsEmEgksifZ1kn622yJRSjtVC1jk0Iu8jfQz28dTZPDmGXsesqIApvagTr7raN7Z7SeIZTy1xRU3zDG5QIDAQAB\n' + 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2bq72ckd0dqEgxWAYHALaiQ0B8RFZ7GO1Zjs4QnBFUNAutiLhpz7WjWaGuD8R1plyF1OWhJQfoBSbCDGW/Y1BSU2AJI5mobMnL2fOyygCVlEzw9RMP4y1BmTdIi + QDcuOSIOoT0Abjd / MOb54gmrCbGiDrI5oCE / pDCBDViwndkD + 6JsPTgQ4I9rAHGkTy0pDLv8NvvyACNFVPMfqS6RYVTOAGBaUeVooiqxGGPkMQTSGuBz3fZrrfwN9QbiR8JZJLMl7dsEmEgksifZ1kn622yJRSjtVC1jk0Iu8jfQz28dTZPDmGXsesqIApvagTr7raN7Z7SeIZTy1xRU3zDG5QIDAQAB\n' +
+    '-----END PUBLIC KEY-----'
   
   // contentCountriesUrl: '/Content/allCountry',
   // contentCurrenciesUrl: '/Content/allCurrency'

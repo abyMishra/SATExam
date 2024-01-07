@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using System.Text.Json.Serialization;
 using UsersService.Models;
 
 namespace UsersService.DataAccess
@@ -10,7 +11,7 @@ namespace UsersService.DataAccess
     {
         private readonly IMongoCollection<User> _userlistCollection;
         private readonly ICommonMethods _commonMethods;
-
+        
 
         public UserDataAccess(IOptions<DBSettings> dbSettings, ICommonMethods commonMethods)
         {
@@ -57,7 +58,6 @@ namespace UsersService.DataAccess
 
         public User AuthanticateUser(string username, string password)
         {
-
             var users = _userlistCollection.Find(new BsonDocument()).ToList();
 
             var user = users.FirstOrDefault(x => x.Username == username);
@@ -65,9 +65,12 @@ namespace UsersService.DataAccess
             if (user != null)
             {
                 // Verify the entered password against the stored hashed password
-                bool isPasswordValid = _commonMethods.VerifyPassword(password, user.Password);
+                //var encryptedPassword = _commonMethods.EncryptPassword(password);
+                //bool isPasswordValid = _commonMethods.VerifyPassword(password, user.Password);
 
-                if (!isPasswordValid)
+
+                //if (!isPasswordValid)
+                if(password != user.Password)
                 {
                     user = null; // Set user to null if password is not valid
                 }

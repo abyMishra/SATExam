@@ -5,6 +5,8 @@ import { first } from 'rxjs';
 import { Login } from '../models/login';
 import { IdentityService } from '../services/identity.service';
 import * as JSEncrypt from 'jsencrypt';
+import { environment } from '../../environments/environment';
+
 
 
 @Component({
@@ -24,9 +26,9 @@ export class LoginComponent implements OnInit {
   password: string = "";
   message: string = "";
   show: boolean = false;
-  public publicKey: string = '-----BEGIN PUBLIC KEY-----\n' +
-    'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2bq72ckd0dqEgxWAYHALaiQ0B8RFZ7GO1Zjs4QnBFUNAutiLhpz7WjWaGuD8R1plyF1OWhJQfoBSbCDGW/Y1BSU2AJI5mobMnL2fOyygCVlEzw9RMP4y1BmTdIi + QDcuOSIOoT0Abjd / MOb54gmrCbGiDrI5oCE / pDCBDViwndkD + 6JsPTgQ4I9rAHGkTy0pDLv8NvvyACNFVPMfqS6RYVTOAGBaUeVooiqxGGPkMQTSGuBz3fZrrfwN9QbiR8JZJLMl7dsEmEgksifZ1kn622yJRSjtVC1jk0Iu8jfQz28dTZPDmGXsesqIApvagTr7raN7Z7SeIZTy1xRU3zDG5QIDAQAB\n' + 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2bq72ckd0dqEgxWAYHALaiQ0B8RFZ7GO1Zjs4QnBFUNAutiLhpz7WjWaGuD8R1plyF1OWhJQfoBSbCDGW/Y1BSU2AJI5mobMnL2fOyygCVlEzw9RMP4y1BmTdIi + QDcuOSIOoT0Abjd / MOb54gmrCbGiDrI5oCE / pDCBDViwndkD + 6JsPTgQ4I9rAHGkTy0pDLv8NvvyACNFVPMfqS6RYVTOAGBaUeVooiqxGGPkMQTSGuBz3fZrrfwN9QbiR8JZJLMl7dsEmEgksifZ1kn622yJRSjtVC1jk0Iu8jfQz28dTZPDmGXsesqIApvagTr7raN7Z7SeIZTy1xRU3zDG5QIDAQAB\n' +
-    '-----END PUBLIC KEY-----';
+  //public publicKey: string = '-----BEGIN PUBLIC KEY-----\n' +
+  //  'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2bq72ckd0dqEgxWAYHALaiQ0B8RFZ7GO1Zjs4QnBFUNAutiLhpz7WjWaGuD8R1plyF1OWhJQfoBSbCDGW/Y1BSU2AJI5mobMnL2fOyygCVlEzw9RMP4y1BmTdIi + QDcuOSIOoT0Abjd / MOb54gmrCbGiDrI5oCE / pDCBDViwndkD + 6JsPTgQ4I9rAHGkTy0pDLv8NvvyACNFVPMfqS6RYVTOAGBaUeVooiqxGGPkMQTSGuBz3fZrrfwN9QbiR8JZJLMl7dsEmEgksifZ1kn622yJRSjtVC1jk0Iu8jfQz28dTZPDmGXsesqIApvagTr7raN7Z7SeIZTy1xRU3zDG5QIDAQAB\n' + 'MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2bq72ckd0dqEgxWAYHALaiQ0B8RFZ7GO1Zjs4QnBFUNAutiLhpz7WjWaGuD8R1plyF1OWhJQfoBSbCDGW/Y1BSU2AJI5mobMnL2fOyygCVlEzw9RMP4y1BmTdIi + QDcuOSIOoT0Abjd / MOb54gmrCbGiDrI5oCE / pDCBDViwndkD + 6JsPTgQ4I9rAHGkTy0pDLv8NvvyACNFVPMfqS6RYVTOAGBaUeVooiqxGGPkMQTSGuBz3fZrrfwN9QbiR8JZJLMl7dsEmEgksifZ1kn622yJRSjtVC1jk0Iu8jfQz28dTZPDmGXsesqIApvagTr7raN7Z7SeIZTy1xRU3zDG5QIDAQAB\n' +
+  //  '-----END PUBLIC KEY-----';
 
 
 
@@ -75,8 +77,8 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     this.credentials.username = this.f.username.value;
 
-    const kpassword: string = this.encryptCredentials(this.f.username.value, this.f.password.value);
-    this.credentials.password = kpassword;
+    //const kpassword: string = this.encryptCredentials(this.f.username.value, this.f.password.value);
+    this.credentials.password = this.f.password.value;//kpassword;
 
 
     this.identityService.authanticateUser(this.credentials)
@@ -95,7 +97,7 @@ export class LoginComponent implements OnInit {
   }
   encryptCredentials(login: string, password: string): string {
     const encrypt = new JSEncrypt.JSEncrypt();
-    encrypt.setPublicKey(this.publicKey);
+    encrypt.setPublicKey(environment.publicKey);
 
 
     return encrypt.encrypt(password) as string;

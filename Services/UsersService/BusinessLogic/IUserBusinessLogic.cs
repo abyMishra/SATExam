@@ -13,6 +13,6 @@ namespace UsersService.BusinessLogic
 
         public Task CreateAsync(User user);
 
-        public User AuthanticateUser(string username, string password);
+        public SecurityToken AuthanticateUser(string username, string password);
     }
 }
